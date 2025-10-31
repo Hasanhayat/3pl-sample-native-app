@@ -1,35 +1,61 @@
-import { HapticTab } from '@/app-example/components/haptic-tab';
-import { IconSymbol } from '@/app-example/components/ui/icon-symbol.ios';
-import { Colors } from '@/app-example/constants/theme';
-import MaterialIcons from '@expo/vector-icons/MaterialIcons';
-import { Tabs } from 'expo-router';
-import { useColorScheme } from 'react-native';
+import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Tabs } from "expo-router";
+import React from "react";
+import { Platform } from "react-native";
+import '../global.css';
+
 
 export default function TabLayout() {
+  return (
+    <Tabs
+      screenOptions={{
+        headerShown: false,
+        tabBarActiveTintColor: "#4F46E5",
+        tabBarInactiveTintColor: "#9CA3AF",
+        tabBarStyle: {
+          backgroundColor: "#111827",
+          borderTopColor: "#1F2937",
+          height: Platform.OS === "ios" ? 70 : 50,
+          paddingBottom: Platform.OS === "ios" ? 25 : 10,
+          paddingTop: 10,
+        },
+        tabBarLabelStyle: {
+          fontSize: 12,
+          marginTop: 4,
+        },
+        animation: "shift",
+      }}
+    >
+      <Tabs.Screen
+        name="Home"
+        options={{
+          title: "Dashboard",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="home-outline" size={24} color={color} />
+          ),
+        }}
+      />
 
-    const colorScheme = useColorScheme();
-    return (
-        <Tabs
-            screenOptions={{
-                tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
-                headerShown: false,
-                tabBarButton: HapticTab,
-            }}>
-        
-            <Tabs.Screen
-                name="Home"
-                options={{
-                    title: 'Home',
-                    tabBarIcon: ({ color }) => <MaterialIcons size={28} name='key' />,
-                }}
-            />
-            <Tabs.Screen
-                name="login"
-                options={{
-                    title: 'login',
-                    tabBarIcon: ({ color }) => <IconSymbol size={28} name="paperplane.fill" color={color} />,
-                }}
-            />
-        </Tabs>
-    );
+      <Tabs.Screen
+        name="Login"
+        options={{
+          title: "Login",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="login" size={24} color={color} />
+          ),
+        }}
+      />
+
+      {/* 🧾 Signup Tab */}
+      <Tabs.Screen
+        name="Signup"
+        options={{
+          title: "Signup",
+          tabBarIcon: ({ color }) => (
+            <Ionicons name="person-add-outline" size={24} color={color} />
+          ),
+        }}
+      />
+    </Tabs>
+  );
 }
