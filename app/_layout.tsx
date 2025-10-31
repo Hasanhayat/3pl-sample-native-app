@@ -3,7 +3,7 @@ import { Stack, useRouter } from "expo-router";
 import { StatusBar } from "expo-status-bar";
 import { useEffect, useState } from "react";
 import { useColorScheme } from "react-native";
-import './global.css';
+// import './global.css';
 
 
 export default function RootLayout() {
